@@ -22,6 +22,7 @@ for (let line of lines) {
         safe1++
     }
 
+    // Part 2
     for (let i = 0; i < reports.length; i++) {
         let reportsPart = [...reports];
         reportsPart.splice(i, 1)
@@ -33,9 +34,9 @@ for (let line of lines) {
     }
 
 }
+
 console.log(safe1)
 console.log(safe2)
-
 
 function isDescending(arr: number[]): boolean {
     for (let i = 0; i < arr.length - 1; i++) {
