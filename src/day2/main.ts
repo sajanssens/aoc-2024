@@ -56,28 +56,9 @@ function isAscending(arr: number[]): boolean {
 }
 
 function isSafe(arr: number[]): boolean {
-    let removedOne = false;
     for (let i = 0; i < arr.length - 1; i++) {
         let diff = Math.abs(arr[i] - arr[i + 1])
         if (diff < 1 || diff > 3) {
-            return false
-        }
-    }
-    return true
-}
-
-function isSafeDescending(arr: number[]): boolean {
-    for (let i = 0; i < arr.length - 1; i++) {
-        if (arr[i] < arr[i + 1]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function isSafeAscending(arr: number[]): boolean {
-    for (let i = 0; i < arr.length - 1; i++) {
-        if (arr[i] > arr[i + 1]) {
             return false
         }
     }
