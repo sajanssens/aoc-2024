@@ -32,7 +32,6 @@ for (let line of lines) {
             break
         }
     }
-
 }
 
 console.log(safe1)
