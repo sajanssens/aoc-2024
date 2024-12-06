@@ -1,4 +1,5 @@
 import {readFileSync} from 'fs';
+import {toCharMatrix} from "../util/util";
 
 const filePath = 'data.txt';
 const fileContent = readFileSync(filePath, 'utf8');
@@ -65,9 +66,6 @@ function countMatches(line: string) {
     return line.match(/XMAS/g)?.length ?? 0;
 }
 
-function toCharMatrix(lines: string[]) {
-    return lines.map(str => str.split(""));
-}
 
 function transpose(matrix: string[][]) {
     return matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
