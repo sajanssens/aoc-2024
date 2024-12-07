@@ -1,5 +1,6 @@
 import {readFileSync} from 'fs';
 
+let start = Date.now()
 const filePath = 'data.txt';
 const fileContent = readFileSync(filePath, 'utf8');
 let lines = fileContent.split("\r\n").filter(line => line !== "");
@@ -15,5 +16,5 @@ let lines = fileContent.split("\r\n").filter(line => line !== "");
 (function () {
     let result = 0;
 
-    console.log(result);
+    console.log(`Result: ${result} took ${Date.now() - start}ms`);
 })();

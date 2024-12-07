@@ -1,7 +1,9 @@
 import {readFileSync} from 'fs';
 import {generatePaddedNumbers} from "../util/util";
 
-const filePath = 'test.txt';
+let start = Date.now()
+
+const filePath = 'data.txt';
 const fileContent = readFileSync(filePath, 'utf8');
 let lines = fileContent.split("\r\n").filter(line => line !== "");
 
@@ -34,5 +36,5 @@ let numberOfOperators = 3; // part 2
             }
         }
     }
-    console.log(`Result: ${result}`);
+    console.log(`Result: ${result} took ${Date.now() - start}ms`);
 })();
