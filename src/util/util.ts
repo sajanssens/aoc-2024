@@ -11,10 +11,23 @@ export function findElementPosition<T>(matrix: T[][], target: T): [number, numbe
     }
     return [-1, -1]; // Return null if the element is not found
 }
- export function countOccurrences<T>(matrix: T[][], target: T): number {
-     let count = 0;
-     for (const row of matrix) {
-         count += row.filter((element) => element === target).length;
-     }
-     return count;
- }
+
+export function countOccurrences<T>(matrix: T[][], target: T): number {
+    let count = 0;
+    for (const row of matrix) {
+        count += row.filter((element) => element === target).length;
+    }
+    return count;
+}
+
+export function generateBaseNumbers(n: number, base: number = 2): string[] {
+    const binaryNumbers: string[] = [];
+    const totalNumbers = Math.pow(base, n); // 2^n numbers
+
+    for (let i = 0; i < totalNumbers; i++) {
+        const binary = i.toString(base).padStart(n, '0'); // Ensure n digits with leading zeros
+        binaryNumbers.push(binary);
+    }
+
+    return binaryNumbers;
+}
