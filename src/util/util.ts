@@ -20,12 +20,12 @@ export function countOccurrences<T>(matrix: T[][], target: T): number {
     return count;
 }
 
-export function generateBaseNumbers(n: number, base: number = 2): string[] {
+export function generatePaddedNumbers(numberOfDigits: number, base: number = 2): string[] {
     const binaryNumbers: string[] = [];
-    const totalNumbers = Math.pow(base, n); // 2^n numbers
+    const totalNumbers = Math.pow(base, numberOfDigits); // 2^numberOfDigits numbers
 
     for (let i = 0; i < totalNumbers; i++) {
-        const binary = i.toString(base).padStart(n, '0'); // Ensure n digits with leading zeros
+        const binary = i.toString(base).padStart(numberOfDigits, '0'); // Ensure numberOfDigits digits with leading zeros
         binaryNumbers.push(binary);
     }
 
