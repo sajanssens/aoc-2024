@@ -1,8 +1,8 @@
 import {readFileSync} from 'fs';
-import {countOccurrences, create2DArray, Hashtable, isEqual, Location, toCharMatrix} from "../util/util";
+import {create2DArray, Hashtable, isEqual, Location, toCharMatrix} from "../util/util";
 
 let start = Date.now()
-const filePath = 'test.txt';
+const filePath = 'data.txt';
 const fileContent = readFileSync(filePath, 'utf8');
 let lines = fileContent.split("\r\n").filter(line => line !== "");
 
@@ -23,7 +23,6 @@ let lines = fileContent.split("\r\n").filter(line => line !== "");
             antennas[mapElement].push([row, col])
         }
     }
-    // console.table(map);
 
     let antiNodes = create2DArray(rowCount, colCount, '.')
     for (let row = 0; row < rowCount; row++) {
@@ -33,19 +32,30 @@ let lines = fileContent.split("\r\n").filter(line => line !== "");
             let currentLocation = [row, col];
             let antennaLocations = antennas[mapElement];
             for (let antennaLocation of antennaLocations) {
-                if (isEqual(antennaLocation, currentLocation)) continue
+                if (isEqual(antennaLocation, currentLocation)) {
+                    antiNodes[row][col] = mapElement // part 2
+                    continue
+                }
                 let rowDistance = antennaLocation[0] - row;
                 let colDistance = antennaLocation[1] - col;
-                let antiNodeRow = row + 2 * rowDistance;
-                let antiNodeCol = col + 2 * colDistance;
 
-                if (antiNodeRow >= 0 && antiNodeRow < rowCount && antiNodeCol >= 0 && antiNodeCol < colCount)
-                    antiNodes[antiNodeRow][antiNodeCol] = '#'
+                let factor = 2
+                while (true) { // part 2
+                    let antiNodeRow = row + factor * rowDistance;
+                    let antiNodeCol = col + factor * colDistance;
+
+                    if (antiNodeRow >= 0 && antiNodeRow < rowCount && antiNodeCol >= 0 && antiNodeCol < colCount)
+                        antiNodes[antiNodeRow][antiNodeCol] = '#'
+                    else
+                        break // part 2
+
+                    factor++ // part 2
+                }
             }
         }
     }
-    result = countOccurrences(antiNodes, '#');
-    console.log(`Result: ${result}, took ${Date.now() - start}ms`);
+    result = antiNodes.flat().filter(c => c !== '.').length
+    console.log(`Result: ${result} | it took ${Date.now() - start} ms`);
 })();
 
 // Part 2
