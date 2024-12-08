@@ -1,4 +1,5 @@
 import {readFileSync} from 'fs';
+import {Hashtable} from "../util/util";
 
 const filePath = 'data.txt';
 const fileContent = readFileSync(filePath, 'utf8');
@@ -8,10 +9,6 @@ let pageNumberLines = blocks[1].split("\r\n").filter(l => l !== "")
 
 // console.log(orderingRules);
 // console.log(pageNumberLines);
-
-type Hashtable<T> = {
-    [key: string]: T[];
-};
 
 const after: Hashtable<string> = {};
 const before: Hashtable<string> = {};

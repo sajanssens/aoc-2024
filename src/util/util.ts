@@ -1,3 +1,9 @@
+export type Hashtable<T> = {
+    [key: string]: T[];
+};
+
+export type Location = [row: number, col: number]
+
 export function toCharMatrix(lines: string[]) {
     return lines.filter(l => l !== "").map(str => str.split(""));
 }
@@ -31,3 +37,21 @@ export function generatePaddedNumbers(numberOfDigits: number, base: number = 2):
 
     return binaryNumbers;
 }
+
+export function isEqual<T extends readonly unknown[]>(t1: T, t2: T): boolean {
+    if (t1.length !== t2.length) {
+        return false;
+    }
+    return t1.every((value, index) => value === t2[index]);
+}
+
+export function create2DArray<T>(rows: number, cols: number, value: T): T[][] {
+    return Array.from({length: rows}, () => Array(cols).fill(value));
+}
+
+export const isBetween = <T extends number>(value: T, min: T, max: T, inclusive: boolean = false): boolean => {
+    return inclusive
+        ? value >= Math.min(min, max) && value <= Math.max(min, max)
+        : value > Math.min(min, max) && value < Math.max(min, max);
+};
+
