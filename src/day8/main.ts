@@ -57,10 +57,3 @@ let lines = fileContent.split("\r\n").filter(line => line !== "");
     result = antiNodes.flat().filter(c => c !== '.').length
     console.log(`Result: ${result} | it took ${Date.now() - start} ms`);
 })();
-
-// Part 2
-(function () {
-    let result = 0;
-
-    console.log(`Result: ${result} took ${Date.now() - start}ms`);
-})();
