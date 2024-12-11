@@ -55,3 +55,24 @@ export const isBetween = <T extends number>(value: T, min: T, max: T, inclusive:
         : value > Math.min(min, max) && value < Math.max(min, max);
 };
 
+export function replaceCharacter(str: string, index: number, newChar: string): string {
+    if (index < 0 || index >= str.length) {
+        throw new Error("Index out of range.");
+    }
+    return str.slice(0, index) + newChar + str.slice(index + 1);
+}
+
+export function replaceAllCharacters(str: string, target: string, replacement: string): string {
+    return str.split(target).join(replacement);
+}
+
+export function indexOfBlock<T>(array: T[], block: T[]): number {
+    const blockLength = block.length;
+
+    for (let i = 0; i <= array.length - blockLength; i++) {
+        if (array.slice(i, i + blockLength).every((value, index) => value === block[index])) {
+            return i; // Found the start index
+        }
+    }
+    return -1; // Not found
+}
