@@ -77,18 +77,29 @@ export function indexOfBlock<T>(array: T[], block: T[]): number {
     return -1; // Not found
 }
 
+
 export function getHorizontalNeighbors<T>(matrix: T[][], row: number, col: number): T[] {
+    return getNeighbors(matrix, row, col, true);
+
+}
+
+export function getNeighbors<T>(matrix: T[][], row: number, col: number, diagonalToo = false): T[] {
     const neighbors: T[] = [];
     const directions = [
         [-1, 0],  // Up
         [1, 0],   // Down
         [0, -1],  // Left
         [0, 1],   // Right
-        // [-1, -1], // Top-left
-        // [-1, 1],  // Top-right
-        // [1, -1],  // Bottom-left
-        // [1, 1],   // Bottom-right
     ];
+
+    if (diagonalToo) {
+        directions.push(...[
+            [-1, -1], // Top-left
+            [-1, 1],  // Top-right
+            [1, -1],  // Bottom-left
+            [1, 1],   // Bottom-right])
+        ])
+    }
 
     for (const [dr, dc] of directions) {
         const newRow = row + dr;
