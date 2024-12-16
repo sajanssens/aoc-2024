@@ -22,9 +22,9 @@ function determineRegion(tile: Tile, tiles: Tile[][], regionId: number, regions:
     tile.region = regionId
     if (!regions[regionId]) regions[regionId] = []
     regions[regionId].push(tile)
-    let neighbors = getNeighbors(tiles, tile.row, tile.col, true);
+    let neighbors = getNeighbors(tiles, tile.row, tile.col);
     for (let neighbor of neighbors) {
-        if (neighbor.plant === tile.plant && neighbor.region !== regionId) {
+        if (neighbor.plant === tile.plant && neighbor.region !== tile.region) {
             determineRegion(neighbor, tiles, regionId, regions)
         }
     }
@@ -70,10 +70,10 @@ function determineRegion(tile: Tile, tiles: Tile[][], regionId: number, regions:
             }
             perimeter += tile.perimeter
         }
-
-        result += area * perimeter
+        let price = area * perimeter
+        console.log(`Region ${regionId} (${region[0].plant}): area=${area} perimeter=${perimeter}, price=${price}`);
+        result += price
     }
-
 
     console.log(`Result: ${result} took ${Date.now() - start}ms`);
 })();
